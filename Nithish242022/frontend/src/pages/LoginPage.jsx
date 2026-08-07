@@ -5,6 +5,7 @@ import {
   ShieldCheck,
   KeyRound,
   Mail,
+  Lock,               // ✅ added
   Eye,
   EyeOff,
   ArrowRight,
@@ -13,13 +14,12 @@ import {
 import { api } from "../services/api";
 
 export default function LoginPage({ onLoginSuccess, setToast }) {
-  const [activePortal, setActivePortal] = useState("STUDENT"); // STUDENT | FACULTY | LIBRARIAN
+  const [activePortal, setActivePortal] = useState("STUDENT");
   const [email, setEmail] = useState("student@university.edu");
   const [password, setPassword] = useState("student123");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  /** Portal definitions – each supplies a logo, colour accent & demo creds */
   const portals = [
     {
       id: "STUDENT",
@@ -27,7 +27,6 @@ export default function LoginPage({ onLoginSuccess, setToast }) {
       icon: GraduationCap,
       accent: "var(--accent-cyan)",
       bg: "rgba(6,182,212,0.12)",
-      border: "rgba(6,182,212,0.3)",
       badge: "Student Access",
       defaultEmail: "student@university.edu",
       defaultPass: "student123",
@@ -39,7 +38,6 @@ export default function LoginPage({ onLoginSuccess, setToast }) {
       icon: BookOpenCheck,
       accent: "var(--accent-amber)",
       bg: "rgba(245,158,11,0.12)",
-      border: "rgba(245,158,11,0.3)",
       badge: "Faculty Access",
       defaultEmail: "faculty@university.edu",
       defaultPass: "faculty123",
@@ -51,11 +49,10 @@ export default function LoginPage({ onLoginSuccess, setToast }) {
       icon: ShieldCheck,
       accent: "var(--primary)",
       bg: "rgba(99,102,241,0.12)",
-      border: "rgba(99,102,241,0.3)",
       badge: "Admin Control",
       defaultEmail: "librarian@library.org",
       defaultPass: "admin123",
-      desc: "Full CRUD for books, members, and transactions.",
+      desc: "Full CRUD for books, members, transactions.",
     },
   ];
 
@@ -88,7 +85,7 @@ export default function LoginPage({ onLoginSuccess, setToast }) {
   return (
     <div className="portal-login-viewport glass">
       <div className="portal-login-wrapper">
-        {/* Header with library logo */}
+        {/* Header */}
         <div className="portal-header">
           <div className="portal-logo-container">
             <img
@@ -133,7 +130,7 @@ export default function LoginPage({ onLoginSuccess, setToast }) {
                     style={{
                       color: p.accent,
                       background: p.bg,
-                      borderColor: p.border,
+                      borderColor: p.bg,
                     }}
                   >
                     {p.badge}
@@ -145,7 +142,9 @@ export default function LoginPage({ onLoginSuccess, setToast }) {
 
                 <div
                   className="portal-select-indicator"
-                  style={{ color: selected ? p.accent : "var(--text-dim)" }}
+                  style={{
+                    color: selected ? p.accent : "var(--text-dim)",
+                  }}
                 >
                   {selected ? "● Active Selection" : "Click to Select"}
                 </div>
@@ -174,19 +173,12 @@ export default function LoginPage({ onLoginSuccess, setToast }) {
                 });
               }}
             >
-              <Sparkles size={14} /> 1‑Click Auto Fill Credentials
+              <Sparkles size={14} /> 1‑Click Auto Fill
             </button>
           </div>
 
           <form onSubmit={handleSubmit}>
-            <div
-              className="login-inputs-grid"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "16px",
-              }}
-            >
+            <div className="login-inputs-grid">
               {/* Email */}
               <div className="form-group">
                 <label>Academic / Staff Email *</label>
@@ -227,7 +219,7 @@ export default function LoginPage({ onLoginSuccess, setToast }) {
               </div>
             </div>
 
-            {/* Demo creds hint */}
+            {/* Demo credentials help */}
             <div
               style={{
                 display: "flex",
@@ -238,19 +230,9 @@ export default function LoginPage({ onLoginSuccess, setToast }) {
               }}
             >
               <div style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>
-                Demo Credentials:{" "}
-                <strong style={{ color: cur.accent }}>{cur.defaultEmail}</strong> /{" "}
+                Demo: <strong style={{ color: cur.accent }}>{cur.defaultEmail}</strong> /
                 <strong>{cur.defaultPass}</strong>
               </div>
-              <span
-                style={{
-                  color: "var(--accent-cyan)",
-                  fontSize: "0.82rem",
-                  cursor: "pointer",
-                }}
-              >
-                Portal Access Help
-              </span>
             </div>
 
             {/* Submit */}
@@ -263,13 +245,7 @@ export default function LoginPage({ onLoginSuccess, setToast }) {
                 boxShadow: `0 4px 18px ${cur.bg}`,
               }}
             >
-              {loading ? (
-                "Authenticating Access..."
-              ) : (
-                <>
-                  Access {cur.name} <ArrowRight size={18} />
-                </>
-              )}
+              {loading ? "Authenticating…" : <>Access {cur.name} <ArrowRight size={18} /></>}
             </button>
           </form>
         </div>
