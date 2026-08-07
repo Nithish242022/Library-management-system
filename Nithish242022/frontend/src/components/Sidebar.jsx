@@ -1,51 +1,21 @@
-// src/components/Sidebar.jsx
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import {
-  Home,
-  BookOpen,
-  Users,
-  LogOut,
-  Menu,
-} from "lucide-react";
+import { Home, BookOpen, Users, LogOut } from "lucide-react";
 import { api } from "../services/api";
 
-/* ------------------------------------------------------------------
-   Sidebar – glass‑styled vertical navigation
-   ------------------------------------------------------------------ */
 export default function Sidebar({ user, setToast }) {
   const navigate = useNavigate();
 
-  // Menu definition – each entry is rendered as a NavLink
   const menuItems = [
-    {
-      label: "Dashboard",
-      to: "/dashboard",
-      icon: Home,
-    },
-    {
-      label: "Books",
-      to: "/books",
-      icon: BookOpen,
-    },
-    {
-      label: "Members",
-      to: "/members",
-      icon: Users,
-    },
+    { label: "Dashboard", to: "/dashboard", icon: Home },
+    { label: "Books", to: "/books", icon: BookOpen },
+    { label: "Members", to: "/members", icon: Users },
   ];
 
-  // -----------------------------------------------------------------
-  // Sign‑out handler – calls backend, shows toast, redirects to login
-  // -----------------------------------------------------------------
   const handleLogout = async () => {
     try {
-      await api.post("/auth/logout");
-      setToast({
-        type: "success",
-        message: "Signed out successfully – redirecting to login",
-      });
-      // Clear any client‑side auth state (you may also clear localStorage, etc.)
+      await api.post("/api/auth/logout");
+      setToast({ type: "success", message: "Signed out – returning to login" });
       navigate("/", { replace: true });
     } catch (err) {
       setToast({ type: "error", message: err.message || "Logout failed" });
@@ -69,9 +39,7 @@ export default function Sidebar({ user, setToast }) {
         borderRight: "1px solid var(--border-glass)",
       }}
     >
-      {/* -----------------------------------------------------------------
-          Top – App logo & user avatar
-          ----------------------------------------------------------------- */}
+      {/* Logo & title */}
       <div className="sidebar-top">
         <div
           className="logo-container"
@@ -82,10 +50,9 @@ export default function Sidebar({ user, setToast }) {
             marginBottom: "2rem",
           }}
         >
-          {/* Replace with your actual logo file if you have one */}
           <img
             src="/library_logo.png"
-            alt="Library logo"
+            alt="Logo"
             style={{ width: "30px", height: "30px" }}
             onError={(e) => (e.target.style.display = "none")}
           />
@@ -100,9 +67,7 @@ export default function Sidebar({ user, setToast }) {
           </h2>
         </div>
 
-        {/* -----------------------------------------------------------------
-            Navigation links
-            ----------------------------------------------------------------- */}
+        {/* Nav links */}
         <nav>
           {menuItems.map((item) => {
             const Icon = item.icon;
@@ -119,12 +84,8 @@ export default function Sidebar({ user, setToast }) {
                   marginBottom: "0.6rem",
                   borderRadius: "8px",
                   textDecoration: "none",
-                  color: isActive
-                    ? "var(--accent-cyan)"
-                    : "var(--text-muted)",
-                  background: isActive
-                    ? "rgba(6,182,212,0.12)"
-                    : "transparent",
+                  color: isActive ? "var(--accent-cyan)" : "var(--text-muted)",
+                  background: isActive ? "rgba(6,182,212,0.12)" : "transparent",
                 })}
               >
                 <Icon
@@ -138,9 +99,7 @@ export default function Sidebar({ user, setToast }) {
         </nav>
       </div>
 
-      {/* -----------------------------------------------------------------
-          Bottom – user badge & sign‑out button
-          ----------------------------------------------------------------- */}
+      {/* Bottom – user badge + Sign‑Out */}
       <div className="sidebar-bottom">
         <div
           className="user-badge glass"
@@ -153,10 +112,9 @@ export default function Sidebar({ user, setToast }) {
             borderRadius: "8px",
           }}
         >
-          {/* Avatar – you can replace with a real image URL */}
           <img
             src={user?.avatar_url || "/default_avatar.png"}
-            alt="User avatar"
+            alt="Avatar"
             style={{
               width: "34px",
               height: "34px",
@@ -188,7 +146,6 @@ export default function Sidebar({ user, setToast }) {
           </div>
         </div>
 
-        {/* Sign‑out button */}
         <button
           type="button"
           className="btn btn-secondary"
