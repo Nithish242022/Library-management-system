@@ -1,15 +1,16 @@
 import sqlite3
 from pathlib import Path
 
+# SQLite file lives in the project root
 DB_PATH = Path(__file__).parent.parent / "library_db.sqlite"
 
 
 def init_database():
-    """Create tables if they don't exist."""
+    """Create all tables if they do not already exist."""
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
-    # Users (for login)
+    # Users – for login demo
     cur.execute(
         """
         CREATE TABLE IF NOT EXISTS users (
@@ -86,12 +87,22 @@ def init_database():
     return "sqlite"
 
 
-def execute_query(query, params=None, fetchone=False, fetchall=False, commit=False):
-    """Utility wrapper around SQLite execution."""
+def execute_query(
+    query,
+    params=None,
+    fetchone=False,
+    fetchall=False,
+    commit=False,
+):
+    """
+    Small wrapper around sqlite3.
+    Returns (result, engine) where result is either a Row, list[Row], or None.
+    """
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
     cur.execute(query, params or ())
+
     result = None
     if fetchone:
         result = cur.fetchone()
@@ -99,5 +110,6 @@ def execute_query(query, params=None, fetchone=False, fetchall=False, commit=Fal
         result = cur.fetchall()
     if commit:
         conn.commit()
+
     conn.close()
     return result, "sqlite"
