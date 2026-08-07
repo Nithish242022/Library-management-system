@@ -1,0 +1,28 @@
+library-management-system/
+│
+├─ backend/
+│   ├─ app.py
+│   ├─ db.py
+│   └─ requirements.txt
+│
+├─ frontend/
+│   ├─ index.html
+│   ├─ package.json
+│   ├─ vite.config.js
+│   └─ src/
+│       ├─ main.jsx
+│       ├─ App.jsx
+│       ├─ pages/
+│       │   ├─ LoginPage.jsx
+│       │   ├─ Dashboard.jsx
+│       │   ├─ MembersPage.jsx
+│       │   └─ BooksPage.jsx
+│       ├─ components/
+│       │   └─ Sidebar.jsx
+│       ├─ services/
+│       │   └─ api.js
+│       └─ styles/
+│           └─ index.css
+│
+├─ .gitignore
+└─ README.md
