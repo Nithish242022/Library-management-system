@@ -5,7 +5,7 @@ import {
   ShieldCheck,
   KeyRound,
   Mail,
-  Lock,               // ✅ added
+  Lock,               
   Eye,
   EyeOff,
   ArrowRight,
