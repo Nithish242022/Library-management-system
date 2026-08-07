@@ -20,29 +20,32 @@ The UI features a portal‑based login, a glass‑morphism dashboard, and CRUD p
 
 library-management-system/
 │
-├─ backend/                       # Flask API (Python)
-│   ├─ app.py                     # All REST endpoints
-│   ├─ db.py                      # SQLite helper (init + execute_query)
-│   └─ requirements.txt          # Python dependencies
+├─ backend/
+│   ├─ app.py
+│   ├─ db.py
+│   └─ requirements.txt
 │
-├─ frontend/                      # React UI (Vite)
-│   ├─ package.json               # npm deps – includes react‑router‑dom
-│   ├─ vite.config.js            # Vite dev‑server proxy → http://localhost:5000
-│   ├─ index.html                 # Root HTML file
+├─ frontend/
+│   ├─ package.json
+│   ├─ vite.config.js
+│   ├─ index.html
 │   └─ src/
-│       ├─ main.jsx               # React entry point
-│       ├─ App.jsx                # Top‑level component (login ↔ dashboard switch)
-│       ├─ pages/                # Page‑level components
-│       │   ├─ LoginPage.jsx      # Portal‑based login UI
-│       │   ├─ Dashboard.jsx      # Dashboard widgets + recent activity
-│       │   ├─ BooksPage.jsx      # Books CRUD table & filters
-│       │   └─ MembersPage.jsx    # Members CRUD table & filters
-│       ├─ components/           # Re‑usable UI components
-│       │   └─ Sidebar.jsx        # Navigation drawer (handles sign‑out)
-│       ├─ services/            # API abstraction
-│       │   └─ api.js             # get / post helpers + login shortcut
+│       ├─ main.jsx
+│       ├─ App.jsx
+│       ├─ pages/
+│       │   ├─ LoginPage.jsx
+│       │   ├─ Dashboard.jsx
+│       │   ├─ BooksPage.jsx
+│       │   └─ MembersPage.jsx
+│       ├─ components/
+│       │   └─ Sidebar.jsx
+│       ├─ services/
+│       │   └─ api.js
 │       └─ styles/
-│           └─ index.css          # Global CSS (glass‑morphism tokens)
+│           └─ index.css
+│
+├─ .gitignore
+├─ README.md
 │
 ├─ .gitignore                     # Ignored files (node_modules, venv, .env, etc.)
 ├─ README.md                      # Project overview, run instructions, layout
