@@ -1,0 +1,76 @@
+:root {
+  --text-primary: #e5e7eb;
+  --text-muted: #9ca3af;
+  --border-glass: rgba(255, 255, 255, 0.15);
+  --bg-glass: rgba(255, 255, 255, 0.08);
+  --accent-cyan: #06b6d4;
+  --accent-amber: #f59e0b;
+  --primary: #6366f1;
+}
+
+/* Basic reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Body – dark, glass‑morphism background */
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: radial-gradient(
+    ellipse at top left,
+    rgba(20, 20, 30, 0.9),
+    #111
+  );
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* Utility classes */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+}
+
+/* Buttons */
+.btn {
+  cursor: pointer;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+.btn-secondary {
+  background: var(--bg-glass);
+  color: var(--text-primary);
+}
+
+/* Toasts */
+.toast {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 6px;
+  z-index: 1000;
+}
+.toast.success {
+  background: rgba(16, 185, 129, 0.85);
+}
+.toast.error {
+  background: rgba(239, 68, 68, 0.85);
+}
+
+/* Add any component‑specific styles here (cards, forms, etc.) */
