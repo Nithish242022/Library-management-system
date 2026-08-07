@@ -1,22 +1,42 @@
-export const api = {
-  login: async ({ email, password }) => {
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!res.ok) {
-      const err = await res.json();
-      throw new Error(err.error || "Login failed");
-    }
-    return res.json();
-  },
+// src/services/api.js
+/**
+ * Tiny wrapper around fetch.
+ * All endpoints are relative; Vite proxies `/api/*` → http://localhost:5000.
+ */
 
-  // Example helper – you can add more as needed
-  getBooks: async (params = {}) => {
-    const qs = new URLSearchParams(params).toString();
-    const res = await fetch(`/api/books?${qs}`);
-    if (!res.ok) throw new Error("Failed to fetch books");
-    return res.json();
-  },
+async function get(endpoint, params = {}) {
+  const qs = new URLSearchParams(params).toString();
+  const url = qs ? `${endpoint}?${qs}` : endpoint;
+  const res = await fetch(url, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || "API GET failed");
+  }
+  return res.json();
+}
+
+async function post(endpoint, body = {}, method = "POST") {
+  const res = await fetch(endpoint, {
+    method,
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || `API ${method} failed`);
+  }
+  return res.json();
+}
+
+// Export a namespace used throughout the UI
+export const api = {
+  get,
+  post,
+  login: async ({ email, password }) => post("/api/auth/login", { email, password }),
 };
