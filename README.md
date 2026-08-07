@@ -1,7 +1,6 @@
 # Library Management System
 
-A **full‑stack demo** that pairs a **Flask** backend (SQLite) with a **React** frontend built on **Vite**.  
-The UI features a portal‑based login, a glass‑morphism dashboard, and CRUD pages for **Books** and **Members**.
+A full-stack web application developed to automate library operations such as book management, member management, book issue/return, and fine calculation.
 
 ## 🎯 Features
 
@@ -15,5 +14,12 @@ The UI features a portal‑based login, a glass‑morphism dashboard, and CRUD p
 | Responsive glass‑morphism design | No Tailwind – pure CSS |
 | API proxy | Vite automatically proxies `/api/*` to Flask (`localhost:5000`) |
 | Ready for Docker / CI | Docker‑compose and GitHub Actions workflow included |
+
+🛠️ Technologies Used
+Frontend: React, HTML, CSS, JavaScript
+Backend: Python, Flask
+Database: MySQL
+Communication: REST APIs, JSON
+Tools: VS Code, MySQL Workbench, Postman, Git/GitHub
 
 
