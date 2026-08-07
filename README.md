@@ -16,36 +16,4 @@ The UI features a portal‑based login, a glass‑morphism dashboard, and CRUD p
 | API proxy | Vite automatically proxies `/api/*` to Flask (`localhost:5000`) |
 | Ready for Docker / CI | Docker‑compose and GitHub Actions workflow included |
 
-## 📂 Repository layout
 
-library-management-system/
-│
-├─ backend/
-│   ├─ app.py
-│   ├─ db.py
-│   └─ requirements.txt
-│
-├─ frontend/
-│   ├─ package.json
-│   ├─ vite.config.js
-│   ├─ index.html
-│   └─ src/
-│       ├─ main.jsx
-│       ├─ App.jsx
-│       ├─ pages/
-│       │   ├─ LoginPage.jsx
-│       │   ├─ Dashboard.jsx
-│       │   ├─ BooksPage.jsx
-│       │   └─ MembersPage.jsx
-│       ├─ components/
-│       │   └─ Sidebar.jsx
-│       ├─ services/
-│       │   └─ api.js
-│       └─ styles/
-│           └─ index.css
-│
-├─ .gitignore
-├─ README.md
-│
-├─ .gitignore                     # Ignored files (node_modules, venv, .env, etc.)
-├─ README.md                      # Project overview, run instructions, layout
